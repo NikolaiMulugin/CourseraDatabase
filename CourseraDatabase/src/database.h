@@ -20,11 +20,16 @@ public:
 	int RemoveIf(Condition predicat);//???
 
 	template<typename Condition>
-	vector<string> FindIf(Condition predicat){
-		auto it = find_if(begin(data_), end(data_),
-				[auto pair](){
-			return predicat(pair.first(),event);
-		});
+	vector<pair<Date, string>> FindIf(Condition predicat){
+		vector<pair<Date, string>> entries;
+		for (const auto& [year, events] : data_) {
+			for (const auto& event : events) {
+				if (predicat(year, event)) {
+					entries.push_back({year, event});
+				}
+			}
+		}
+		return entries;
 	}
 
 	string Last(const Date& date);//???

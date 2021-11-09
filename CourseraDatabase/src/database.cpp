@@ -24,4 +24,9 @@ void Database::Print(ostream& os) {
 	}
 }
 
+string Database::Last(const Date& date){
+	auto it = --data_.upper_bound(date);
+	return it->second[it->second.size() - 1];
+}
+
 

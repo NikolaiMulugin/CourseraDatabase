@@ -2,6 +2,7 @@
 
 #include "logic_operations.h"
 #include <iostream>
+#include <algorithm>
 #include "date.h"
 #include <memory>
 
@@ -20,7 +21,7 @@ public:
 
 class DateComparisonNode: public Node{
 public:
-	DateComparisonNode(const Comparison& c, const Date& d): Node(), comp(c), date(d){}
+	DateComparisonNode(const Comparison& c, const Date& d): Node(), comp_(c), date_(d){}
 	bool Evaluate(const Date& date, const string& event);
 private:
 	const Comparison comp_;
@@ -29,7 +30,7 @@ private:
 
 class EventComparisonNode: public Node{
 public:
-	EventComparisonNode(const Comparison& c, const string& e): Node(), comp(c), event(e){}
+	EventComparisonNode(const Comparison& c, const string& e): Node(), comp_(c), event_(e){}
 	bool Evaluate(const Date& date, const string& event) override;
 private:
 	const Comparison comp_;
@@ -39,11 +40,11 @@ private:
 class LogicalOperationNode: public Node{
 public:
 	bool Evaluate(const Date& date, const string& event) override;
-	LogicalOperationNode(const LogicalOperation& lo, const shared_ptr<LogicalOperation>& l,
-			const shared_ptr<LogicalOperation>& r): Node(), logic_op(lo),left(l),right(r) {}
+	LogicalOperationNode(const LogicalOperation& lo, const shared_ptr<Node>& l,
+			const shared_ptr<Node>& r): Node(), logic_op_(lo),left_(l),right_(r) {}
 private:
 	const LogicalOperation logic_op_;
-	const shared_ptr<LogicalOperation> left_;
-	const shared_ptr<LogicalOperation> right_;
+	const shared_ptr<Node> left_;
+	const shared_ptr<Node> right_;
 
 };

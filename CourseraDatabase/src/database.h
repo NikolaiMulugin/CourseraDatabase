@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include <date.h>
+#include <map>
+#include <set>
 
 using namespace std;
 
@@ -20,4 +22,6 @@ public:
 	vector<string> FindIf(Condition predicat);//???
 
 	string Last(const Date& date);//???
+private:
+	map <Date, vector<string>> data_;
 };

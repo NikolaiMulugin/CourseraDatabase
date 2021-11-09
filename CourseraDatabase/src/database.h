@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -19,7 +20,12 @@ public:
 	int RemoveIf(Condition predicat);//???
 
 	template<typename Condition>
-	vector<string> FindIf(Condition predicat);//???
+	vector<string> FindIf(Condition predicat){
+		auto it = find_if(begin(data_), end(data_),
+				[auto pair](){
+			return predicat(pair.first(),event);
+		});
+	}
 
 	string Last(const Date& date);//???
 private:

@@ -1,5 +1,5 @@
 #include "database.h"
-#include <algorithm>
+
 
 
 void Database::Add(const Date& date, const string& event) {
@@ -11,6 +11,16 @@ void Database::Add(const Date& date, const string& event) {
 		if (entry == events.end()) {
 			data_.at(date).push_back(event);
 		}
+	}
+}
+
+void Database::Print(ostream& os) {
+	for (const auto& [date, events] : data_){
+		os << date;
+		for (auto e : events) {
+			os << " " << events;
+		}
+		os << endl;
 	}
 }
 

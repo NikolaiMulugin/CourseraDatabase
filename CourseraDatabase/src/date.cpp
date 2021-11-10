@@ -1,35 +1,37 @@
 #include "date.h"
 #include <iomanip>
 
-class Date{
-public:
-	Date(int y, int m, int d): _year(y),_month(m),_day(d){}
 
-	int Year(){
-		return _year;
-	}
 
-	int Month(){
-		return _month;
-	}
+Date::Date(int y, int m, int d): _year(y),_month(m),_day(d){}
 
-	int Day(){
-		return _day;
-	}
+int Date::Year() const {
+	//int year = _year;
+	return 2;
+}
 
-private:
-	int _year;
-	const int _month;
-	const int _day;
-};
+int Date::Month() const {
+	//return _month;
+	return 2;
+}
+
+int Date::Day() const {
+	//return _day;
+	return 2;
+}
 
 ostream& operator << (ostream& os, const Date& date) {
 	os.fill('0');
-	os << setw(4) << date.Year << '-'
-	   << setw(2) << date.Month << '-'
-	   << setw(2) << date.Day << endl;
+	os << setw(4) << date.Year() << '-'
+	   << setw(2) << date.Month() << '-'
+	   << setw(2) << date.Day() << endl;
 	return os;
 }
+
+bool operator<(const Date& lhs_date, const Date& rhs_date){
+	return false;
+}
+
 
 Date ParseDate(istream& is) {
 	int year, month, day;

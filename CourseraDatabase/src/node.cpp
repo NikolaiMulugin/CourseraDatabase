@@ -1,9 +1,5 @@
 #include "node.h"
-
-bool DoLogicOp(const LogicalOperation& op, bool lhs, bool rhs) const {
-	bool res = (op == LogicalOperation::And) ? (lhs and rhs) : (lhs or rhs);
-	return res;
-}
+#include "logic_operations.h"
 
 bool EmptyNode::Evaluate(const Date& date, const string& event) {
 	return false;

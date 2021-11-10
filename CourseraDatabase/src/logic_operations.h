@@ -1,4 +1,4 @@
-#pragma once;
+#pragma once
 
 #include <iostream>
 
@@ -11,7 +11,7 @@ enum class LogicalOperation{
 	And,
 };
 
-bool DoLogicOp (LogicalOperation& op, bool lhs, bool rhs) const;
+bool DoLogicOp (const LogicalOperation& op, bool lhs, bool rhs);
 
 enum class Comparison{
 	Less,

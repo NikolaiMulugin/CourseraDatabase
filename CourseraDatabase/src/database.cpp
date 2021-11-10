@@ -17,8 +17,8 @@ void Database::Add(const Date& date, const string& event) {
 void Database::Print(ostream& os) {
 	for (const auto& [date, events] : data_){
 		os << date;
-		for (auto e : events) {
-			os << " " << events;
+		for (auto event : events) {
+			os << " " << event;
 		}
 		os << endl;
 	}

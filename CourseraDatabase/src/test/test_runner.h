@@ -4,12 +4,28 @@
 #include <exception>
 #include <iostream>
 #include <string>
+#include <vector>
 #include <map>
 #include <set>
 
 using namespace std;
 
 //output operators
+
+template <class T>
+ostream& operator << (ostream& os, const vector<T>& s) {
+  os << "{";
+  bool first = true;
+  for (const auto& x : s) {
+    if (!first) {
+      os << ", ";
+    }
+    first = false;
+    os << x;
+  }
+  return os << "}";
+}
+
 
 template <class T>
 ostream& operator << (ostream& os, const set<T>& s) {
@@ -23,6 +39,13 @@ ostream& operator << (ostream& os, const set<T>& s) {
     os << x;
   }
   return os << "}";
+}
+
+template <class T, class V>
+ostream& operator << (ostream& os, const pair<T,V>& s) {
+  //os << "{";
+  os << s.first << " " << s.second;
+  return os << endl;//"}";
 }
 
 template <class K, class V>

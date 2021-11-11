@@ -29,13 +29,18 @@ ostream& operator << (ostream& os, const Date& date) {
 }
 
 bool operator<(const Date& lhs_date, const Date& rhs_date){
-	return false;
+	return lhs_date.Year() < rhs_date.Year() or
+			(lhs_date.Year() == rhs_date.Year() and (
+					lhs_date.Month() < rhs_date.Month() or
+					(lhs_date.Month() == rhs_date.Month() and lhs_date.Day() < rhs_date.Day())));
 }
 bool operator>(const Date& lhs_date, const Date& rhs_date){
-	return false;
+	return (not (lhs_date < rhs_date)) and (not (lhs_date == rhs_date));
 }
 bool operator==(const Date& lhs_date, const Date& rhs_date){
-	return false;
+	return lhs_date.Year() == rhs_date.Year() and
+			lhs_date.Month() == rhs_date.Month() and
+			lhs_date.Day() == rhs_date.Day();
 }
 
 

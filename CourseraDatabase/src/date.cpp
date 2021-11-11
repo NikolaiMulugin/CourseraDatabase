@@ -6,18 +6,15 @@
 Date::Date(int y, int m, int d): _year(y),_month(m),_day(d){}
 
 int Date::Year() const {
-	//int year = _year;
-	return 2;
+	return _year;
 }
 
 int Date::Month() const {
-	//return _month;
-	return 2;
+	return _month;
 }
 
 int Date::Day() const {
-	//return _day;
-	return 2;
+	return _day;
 }
 
 ostream& operator << (ostream& os, const Date& date) {

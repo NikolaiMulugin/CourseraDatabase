@@ -10,7 +10,7 @@
 using namespace std;
 
 string ParseEvent(istream& is) {
-  is.get();
+  is >> ws;
   string event;
   getline(is, event);
   return event;

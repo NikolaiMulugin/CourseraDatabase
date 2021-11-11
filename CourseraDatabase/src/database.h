@@ -29,11 +29,11 @@ public:
 	void Print(ostream& os);
 
 	template<typename Condition>
-	int RemoveIf(Condition predicat) {
+	int RemoveIf(Condition pred) {
 		int count = 0;
 		for (auto current = begin(data_); current!=end(data_); ++current) {
 			for (auto cur_ev = begin(current->second); cur_ev!=end(current->second); ++cur_ev) {
-				if (predicat(*current, *cur_ev)) {
+				if (pred(current->first, *cur_ev)) {
 					current->second.erase(cur_ev);
 					if (begin(current->second) == end(current->second)){
 						data_.erase(current);

@@ -31,6 +31,12 @@ ostream& operator << (ostream& os, const Date& date) {
 bool operator<(const Date& lhs_date, const Date& rhs_date){
 	return false;
 }
+bool operator>(const Date& lhs_date, const Date& rhs_date){
+	return false;
+}
+bool operator==(const Date& lhs_date, const Date& rhs_date){
+	return false;
+}
 
 
 Date ParseDate(istream& is) {

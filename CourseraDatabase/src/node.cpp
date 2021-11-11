@@ -6,11 +6,10 @@ bool EmptyNode::Evaluate(const Date& date, const string& event) {
 }
 
 bool DateComparisonNode::Evaluate(const Date& date, const string& event) {
-	//cout << comp_ << date_ << endl;
 	bool ans = ((date < date_  and
-			   	   (comp_ == Comparison::LessOrEqual or comp_ == Comparison::Less)) or
+			   	   (comp_ == Comparison::LessOrEqual or comp_ == Comparison::Less or comp_ == Comparison::NotEqual)) or
 			   (date > date_ and
-				   (comp_ == Comparison::Greater or comp_ == Comparison::GreaterOrEqual)) or
+				   (comp_ == Comparison::Greater or comp_ == Comparison::GreaterOrEqual or comp_ == Comparison::NotEqual)) or
 			   (date == date_ and
 				   (comp_ == Comparison::Equal or comp_ == Comparison::GreaterOrEqual or
 				    comp_ == Comparison::LessOrEqual)));
@@ -18,7 +17,6 @@ bool DateComparisonNode::Evaluate(const Date& date, const string& event) {
 }
 
 bool EventComparisonNode::Evaluate(const Date& date, const string& event) {
-	//cout << comp_ << date_ << endl;
 	bool ans = (event_ == event  and comp_ == Comparison::Equal ) or
 			   (event_ != event and comp_ == Comparison::NotEqual );
 	return ans;

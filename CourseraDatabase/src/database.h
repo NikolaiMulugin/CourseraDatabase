@@ -11,16 +11,32 @@
 using namespace std;
 
 
-/*void foreach_map(const map<Date, vector<string>>& data, Container){
-	for (const auto& [year, events] : data) {
-		for (const auto& event : events) {
-			if (predicat(year, event)) {
-				//action(year, event);
-				entries.push_back({year, event});
+/*
+template<typename Condition>
+	int RemoveIf(Condition pred) {
+		int count = 0;
+		auto current = begin(data_);
+		while (current!=end(data_)) {
+			auto cur_ev = begin(current->second);
+			while (cur_ev!=end(current->second)) {
+				if (pred(current->first, *cur_ev)) {
+					count++;
+					current->second.erase(cur_ev);
+					if (begin(current->second) == end(current->second)){
+						data_.erase(current);
+						break;
+					}
+					continue;
+				}
+				if (cur_ev != end(current->second))
+					++cur_ev;
 			}
+			if (current != end(data_))
+				++current;
 		}
+		return count;
 	}
-}*/
+*/
 
 class Database{
 public:
@@ -31,15 +47,24 @@ public:
 	template<typename Condition>
 	int RemoveIf(Condition pred) {
 		int count = 0;
-		for (auto current = begin(data_); current!=end(data_); ++current) {
-			for (auto cur_ev = begin(current->second); cur_ev!=end(current->second); ++cur_ev) {
+		auto current = begin(data_);
+		while (current!=end(data_)) {
+			auto cur_ev = begin(current->second);
+			while (cur_ev!=end(current->second)) {
 				if (pred(current->first, *cur_ev)) {
-					current->second.erase(cur_ev);
+					count++;
+					cur_ev = current->second.erase(cur_ev);
 					if (begin(current->second) == end(current->second)){
-						data_.erase(current);
+						current = data_.erase(current);
+						break;
 					}
+					continue;
 				}
+				if (cur_ev != end(current->second))
+					++cur_ev;
 			}
+			if (current != end(data_))
+				++current;
 		}
 		return count;
 	}

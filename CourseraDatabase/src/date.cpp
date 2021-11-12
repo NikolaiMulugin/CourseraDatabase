@@ -21,7 +21,7 @@ ostream& operator << (ostream& os, const Date& date) {
 	os.fill('0');
 	os << setw(4) << date.Year() << '-'
 	   << setw(2) << date.Month() << '-'
-	   << setw(2) << date.Day() << endl;
+	   << setw(2) << date.Day();
 	return os;
 }
 

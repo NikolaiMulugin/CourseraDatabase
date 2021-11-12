@@ -11,6 +11,8 @@
 
 using namespace std;
 
+void TestEmptyCondition();
+
 class Database{
 public:
 	void Add(const Date& date, const string& event);
@@ -22,6 +24,7 @@ public:
 		int count = 0;
 		auto current = begin(data_);
 		while (current!=end(data_)) {
+			bool stop = false;
 			auto cur_ev = begin(current->second);
 			while (cur_ev!=end(current->second)) {
 				if (pred(current->first, *cur_ev)) {
@@ -29,6 +32,7 @@ public:
 					cur_ev = current->second.erase(cur_ev);
 					if (begin(current->second) == end(current->second)){
 						current = data_.erase(current);
+						stop = true;
 						break;
 					}
 					continue;
@@ -36,7 +40,7 @@ public:
 				if (cur_ev != end(current->second))
 					++cur_ev;
 			}
-			if (current != end(data_))
+			if (current != end(data_) and !stop)
 				++current;
 		}
 		return count;

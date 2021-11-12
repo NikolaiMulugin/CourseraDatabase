@@ -14,7 +14,7 @@ void Database::Add(const Date& date, const string& event) {
 	}
 }
 
-void Database::Print(ostream& os) {
+void Database::Print(ostream& os) const {
 	for (const auto& [date, events] : data_){
 		for (auto event : events) {
 			os << date << " " << event << endl;
@@ -23,7 +23,7 @@ void Database::Print(ostream& os) {
 	}
 }
 
-string Database::Last(const Date& date){
+string Database::Last(const Date& date) const {
 	auto it = data_.upper_bound(date);
 	if (it == begin(data_))
 		return "No Entries";

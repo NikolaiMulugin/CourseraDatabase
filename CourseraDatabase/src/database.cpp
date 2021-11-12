@@ -16,17 +16,21 @@ void Database::Add(const Date& date, const string& event) {
 
 void Database::Print(ostream& os) {
 	for (const auto& [date, events] : data_){
-		os << date;
 		for (auto event : events) {
-			os << " " << event;
+			os << date << " " << event << endl;
 		}
-		os << endl;
+		//os << endl;
 	}
 }
 
 string Database::Last(const Date& date){
-	auto it = --data_.upper_bound(date);
-	return it->second[it->second.size() - 1];
+	auto it = data_.upper_bound(date);
+	if (it == begin(data_))
+		return "No Entries";
+	--it;
+	stringstream ss;
+	ss << it->first << " " << it->second[it->second.size() - 1];
+	return ss.str();
 }
 
 

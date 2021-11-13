@@ -40,6 +40,18 @@ bool operator==(const Date& lhs_date, const Date& rhs_date){
 			lhs_date.Day() == rhs_date.Day();
 }
 
+bool operator>=(const Date& lhs_date, const Date& rhs_date){
+	return lhs_date > rhs_date || lhs_date == rhs_date;
+}
+
+bool operator<=(const Date& lhs_date, const Date& rhs_date){
+	return lhs_date < rhs_date || lhs_date == rhs_date;
+}
+
+bool operator!=(const Date& lhs_date, const Date& rhs_date){
+	return !(lhs_date == rhs_date);
+}
+
 
 Date ParseDate(istream& is) {
 	int year, month, day;

@@ -22,7 +22,11 @@ private:
 ostream& operator << (ostream& os, const Date& date);
 
 bool operator<(const Date& lhs_date, const Date& rhs_date);
+bool operator<=(const Date& lhs_date, const Date& rhs_date);
 bool operator>(const Date& lhs_date, const Date& rhs_date);
+bool operator>=(const Date& lhs_date, const Date& rhs_date);
 bool operator==(const Date& lhs_date, const Date& rhs_date);
+bool operator!=(const Date& lhs_date, const Date& rhs_date);
 
 Date ParseDate(istream& is);
+

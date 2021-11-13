@@ -13,6 +13,20 @@ using namespace std;
 
 void TestEmptyCondition();
 
+class Entry {
+public:
+	Entry(const Date& date, const string& event);
+	Date GetDate() const;
+	string GetEvent() const;
+private:
+	Date date_;
+	string event_;
+};
+
+ostream& operator<< (ostream& os, const Entry& entry);
+bool operator== (const Entry& lhs_en, const Entry& rhs_en);
+bool operator!= (const Entry& lhs_en, const Entry& rhs_en);
+
 class Database{
 public:
 	void Add(const Date& date, const string& event);
@@ -59,7 +73,9 @@ public:
 		return entries;
 	}
 
-	string Last(const Date& date) const;
+	Entry Last(const Date& date) const;
+
 private:
 	map <Date, vector<string>> data_;
+	map <pair<Date, string>, int> event_count_;
 };

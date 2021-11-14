@@ -6,9 +6,14 @@ void Database::Add(const Date& date, const string& event) {
 		data_.insert({date,{event}});
 		event_count_.insert({{date, event}, 1});
 	} else {
-		if (event_count_.count({date,event}) == 0) {
+		if (event_count_.count({date,event}) == 0 ){
 			event_count_.insert({{date,event},1});
 			data_.at(date).push_back(event);
+		} else {
+			if (event_count_.at({date,event}) == 0 ){
+				event_count_.at({date,event}) = 1;
+				data_.at(date).push_back(event);
+			}
 		}
 	}
 }

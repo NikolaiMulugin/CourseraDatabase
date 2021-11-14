@@ -43,6 +43,7 @@ public:
 			while (cur_ev!=end(current->second)) {
 				if (pred(current->first, *cur_ev)) {
 					count++;
+					event_count_.at({current->first, *cur_ev}) = 0;
 					cur_ev = current->second.erase(cur_ev);
 					if (begin(current->second) == end(current->second)){
 						current = data_.erase(current);

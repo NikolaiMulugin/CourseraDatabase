@@ -13,19 +13,16 @@ using namespace std;
 
 void TestEmptyCondition();
 
-class Entry {
-public:
-	Entry(const Date& date, const string& event);
-	Date GetDate() const;
-	string GetEvent() const;
-private:
-	Date date_;
-	string event_;
+struct Entry {
+	Entry(const Date& d, const string& e);
+	Date date;
+	string event;
 };
 
 ostream& operator<< (ostream& os, const Entry& entry);
 bool operator== (const Entry& lhs_en, const Entry& rhs_en);
 bool operator!= (const Entry& lhs_en, const Entry& rhs_en);
+bool operator< (const Entry& lhs_en, const Entry& rhs_en);
 
 class Database{
 public:
@@ -62,8 +59,8 @@ public:
 	}
 
 	template<typename Condition>
-	vector<pair<Date, string>> FindIf(Condition predicat) const {
-		vector<pair<Date, string>> entries;
+	vector<Entry> FindIf(Condition predicat) const {
+		vector<Entry> entries;
 		for (const auto& [year, events] : data_) {
 			for (const auto& event : events) {
 				if (predicat(year, event)) {
@@ -78,5 +75,5 @@ public:
 
 private:
 	map <Date, vector<string>> data_;
-	map <pair<Date, string>, int> event_count_;
+	map <Entry, int> event_count_;
 };

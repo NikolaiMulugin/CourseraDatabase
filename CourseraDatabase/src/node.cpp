@@ -1,23 +1,31 @@
 #include "node.h"
 #include "logic_operations.h"
 
-bool EmptyNode::Evaluate(const Date& date, const string& event) const {
+DateComparisonNode::DateComparisonNode(const Comparison& c, const Date& d): comp(c), date(d){}
+
+EventComparisonNode::EventComparisonNode(const Comparison& c, const string& e): comp(c), event(e){}
+
+LogicalOperationNode::LogicalOperationNode(const LogicalOperation& lo, const shared_ptr<Node>& l,
+		const shared_ptr<Node>& r): logic_op(lo),left(l),right(r) {}
+
+
+bool EmptyNode::Evaluate(const Date& d, const string& e) const {
 	return true;
 }
 
-bool DateComparisonNode::Evaluate(const Date& date, const string& event) const {
-	return GetComparisonResult(date, date_, comp_);
+bool DateComparisonNode::Evaluate(const Date& d, const string& e) const {
+	return GetComparisonResult(d, date, comp);
 }
 
-bool EventComparisonNode::Evaluate(const Date& date, const string& event) const {
-	return GetComparisonResult(event, event_, comp_);
+bool EventComparisonNode::Evaluate(const Date& d, const string& e) const {
+	return GetComparisonResult(e, event, comp);
 }
 
-bool LogicalOperationNode::Evaluate(const Date& date, const string& event) const {//?????
+bool LogicalOperationNode::Evaluate(const Date& d, const string& e) const {//?????
 	return  DoLogicOp(
-			logic_op_,
-			left_->Evaluate(date, event),
-			right_->Evaluate(date, event));
+			logic_op,
+			left->Evaluate(d, e),
+			right->Evaluate(d, e));
 }
 
 

@@ -2,43 +2,30 @@
 #include <iomanip>
 
 
-
-Date::Date(int y, int m, int d): _year(y),_month(m),_day(d){}
-
-int Date::Year() const {
-	return _year;
-}
-
-int Date::Month() const {
-	return _month;
-}
-
-int Date::Day() const {
-	return _day;
-}
+Date::Date(int y, int m, int d) : year(y), month(m), day(d) {}
 
 ostream& operator << (ostream& os, const Date& date) {
-	os.fill('0');
-	os << setw(4) << date.Year() << '-'
-	   << setw(2) << date.Month() << '-'
-	   << setw(2) << date.Day();
+	os << setw(4) << setfill('0') << date.year << '-'
+	   << setfill('0') << setw(2) << date.month << '-'
+	   << setfill('0') << setw(2) << date.day;
 	return os;
 }
 
 bool operator<(const Date& lhs_date, const Date& rhs_date){
-	return lhs_date.Year() < rhs_date.Year() or
-			(lhs_date.Year() == rhs_date.Year() and (
-					lhs_date.Month() < rhs_date.Month() or
-					(lhs_date.Month() == rhs_date.Month() and lhs_date.Day() < rhs_date.Day())));
+	return tie(lhs_date.year,lhs_date.month, lhs_date.day) <
+			tie(rhs_date.year,rhs_date.month, rhs_date.day);
 }
-bool operator>(const Date& lhs_date, const Date& rhs_date){
-	return (not (lhs_date < rhs_date)) and (not (lhs_date == rhs_date));
-}
+
 bool operator==(const Date& lhs_date, const Date& rhs_date){
-	return lhs_date.Year() == rhs_date.Year() and
-			lhs_date.Month() == rhs_date.Month() and
-			lhs_date.Day() == rhs_date.Day();
+	return lhs_date.year == rhs_date.year and
+			lhs_date.month == rhs_date.month and
+			lhs_date.day == rhs_date.day;
 }
+
+bool operator>(const Date& lhs_date, const Date& rhs_date){
+	return ( !(lhs_date < rhs_date)) && (!(lhs_date == rhs_date));
+}
+
 
 bool operator>=(const Date& lhs_date, const Date& rhs_date){
 	return lhs_date > rhs_date || lhs_date == rhs_date;
@@ -56,9 +43,9 @@ bool operator!=(const Date& lhs_date, const Date& rhs_date){
 Date ParseDate(istream& is) {
 	int year, month, day;
 	is >> year;
-	is.get();
+	is.ignore();
 	is >> month;
-	is.get();
+	is.ignore();
 	is >> day;
 	return {year, month, day};
 }

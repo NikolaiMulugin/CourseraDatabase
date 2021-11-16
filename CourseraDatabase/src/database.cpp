@@ -29,32 +29,29 @@ void Database::Print(ostream& os) const {
 Entry Database::Last(const Date& date) const {
 	auto it = data_.upper_bound(date);
 	if (it == begin(data_))
-		throw invalid_argument("invalid argument in db.Last()");
+		throw invalid_argument("");
 	--it;
 	return {it->first, it->second[it->second.size() - 1]};
 }
 
-Entry::Entry(const Date& date, const string& event): date_(date), event_(event){};
-
-Date Entry::GetDate() const {
-	return date_;
-}
-
-string Entry::GetEvent() const {
-	return event_;
-}
+Entry::Entry(const Date& d, const string& e): date(d), event(e){}
 
 ostream& operator<< (ostream& os, const Entry& entry) {
-	os << entry.GetDate() << " " << entry.GetEvent();
+	os << entry.date << " " << entry.event;
 	return os;
 };
 
 bool operator== (const Entry& lhs_en, const Entry& rhs_en) {
-	return lhs_en.GetDate() == rhs_en.GetDate() && lhs_en.GetEvent() == rhs_en.GetEvent();
+	return tie(lhs_en.date, lhs_en.event) == tie(rhs_en.date, rhs_en.event);
 }
 
 bool operator!= (const Entry& lhs_en, const Entry& rhs_en) {
 	return !(lhs_en == rhs_en);
 }
+
+bool operator< (const Entry& lhs_en, const Entry& rhs_en) {
+	return tie(lhs_en.date, lhs_en.event) < tie(rhs_en.date, rhs_en.event);
+}
+
 
 

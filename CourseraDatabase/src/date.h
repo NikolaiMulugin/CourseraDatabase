@@ -6,17 +6,11 @@
 
 using namespace std;
 
-class Date{
-public:
+struct Date{
 	Date(int y, int m, int d);
-	int Year() const;
-	int Month() const;
-	int Day() const;
-
-private:
-	int _year;
-	int _month;
-	int _day;
+	int year;
+	int month;
+	int day;
 };
 
 ostream& operator << (ostream& os, const Date& date);
@@ -29,4 +23,11 @@ bool operator==(const Date& lhs_date, const Date& rhs_date);
 bool operator!=(const Date& lhs_date, const Date& rhs_date);
 
 Date ParseDate(istream& is);
+/*
+template <class T, class V>
+ostream& operator << (ostream& os, const pair<T,V>& s) {
+  //os << "{";
+  os << s.first << " " << s.second;
+  return os;//"}";
+}*/
 
